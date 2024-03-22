@@ -188,7 +188,9 @@ class Controller(QWidget):
                 self.moildev = self.model.connect_to_moildev(parameter_name=file)
             video_input_path = file
             image_output_path = f"{self.default_path}/cache/thumbnail.png"
-            subprocess.call(['ffmpeg', '-i', video_input_path, '-ss', '00:00:03.000', '-vframes', '1', image_output_path])
+            if (subprocess.call(['ffmpeg', '-i', video_input_path, '-ss', '00:00:03.000', '-vframes', '1', image_output_path]) != 0):
+                self.ui.VideoLoggerText.setText("[ERROR] \"ffmpeg\" failed to generate the thumbnail for the uploaded video!\n[INFO] Please install the \"ffmpeg\" application (or binary files) first on their website, with the link below:\n\n  ... https://ffmpeg.org/download.html")
+                return
             
             self.thumbnail_original = cv2.imread(image_output_path)
             self.thumbnail = self.thumbnail_original.copy()
