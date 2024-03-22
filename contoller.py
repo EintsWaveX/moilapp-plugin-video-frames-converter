@@ -42,12 +42,18 @@ class Controller(QWidget):
     def set_stylesheet(self):
         self.ui.VideoLabelOutput.setStyleSheet(self.model.style_label())
         self.ui.FramesLabelOutput.setStyleSheet(self.model.style_label())
-        self.ui.FPSLabel.setStyleSheet(self.model.style_fira_code_medium(11))
+        self.ui.FPSLabel.setStyleSheet(self.set_custom_font_style("Fira Code Medium", 11))
         
         self.ui.UploadVideoButton.clicked.connect(self.upload_video)
         self.ui.ConvertButton.clicked.connect(self.vtf_convert)
         self.ui.CancelButton.clicked.connect(self.abort_conversion_process)
         self.ui.ClearVideoButton.clicked.connect(self.clear_video)
+    
+    def set_custom_font_style(self, font_family, font_size):
+        stylesheet = f"""
+            font: {font_size}pt "{font_family}";
+        """
+        return stylesheet
     
     def vtf_show_image_to_label(self, label, image, width, height, angle=0, plusIcon=False, scale_content=False):
         if scale_content is True:
