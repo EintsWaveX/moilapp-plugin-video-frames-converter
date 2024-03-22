@@ -1,8 +1,8 @@
 from src.plugin_interface import PluginInterface
-from src.models.model_main import Model
 from src.models.moilutils import MoilUtils
 from PyQt6.QtWidgets import QWidget
 from PyQt6 import QtCore, QtGui, QtWidgets
+from .model_main import Model
 from .ui_main import Ui_Form
 
 import os, sys, shutil, cv2, numpy, math
